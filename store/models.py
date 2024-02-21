@@ -3,6 +3,11 @@ from django.db import models
 # Create your models here.
 
 
+class Promotion(models.Model):
+    description = models.CharField(max_length=255)
+    discount = models.FloatField()
+
+
 class Product(models.Model):
     # sku = models.CharField(max_length=255, unique=True,primary_key=True)  # varchar(255)
     title = models.CharField(max_length=255)  # varchar(255)
@@ -12,6 +17,7 @@ class Product(models.Model):
     inventory = models.IntegerField()  # int
     last_updated = models.DateTimeField(auto_now_add=True)  # timestamp
     Collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    promotions = models.ManyToManyField(Promotion)
 
 
 class Customer(models.Model):
