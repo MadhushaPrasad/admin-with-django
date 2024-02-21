@@ -17,8 +17,9 @@ class Collection(models.Model):
 class Product(models.Model):
     # sku = models.CharField(max_length=255, unique=True,primary_key=True)  # varchar(255)
     title = models.CharField(max_length=255)  # varchar(255)
+    slug = models.SlugField()
     description = models.TextField()  # text
-    price = models.DecimalField(
+    unit_price = models.DecimalField(
         max_digits=6, decimal_places=2)  # decimal(6,2)
     inventory = models.IntegerField()  # int
     last_updated = models.DateTimeField(auto_now_add=True)  # timestamp
