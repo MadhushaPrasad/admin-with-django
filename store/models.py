@@ -42,3 +42,9 @@ class Order(models.Model):
     placed_at = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(
         max_length=20, choices=PAYEMNT_STATES_CHOICES, default=PAYMENT_PENDING)
+
+
+class Address(models.Model):
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    customer = models.OneToOneRel(Customer, on_delete=models.CASCADE)
