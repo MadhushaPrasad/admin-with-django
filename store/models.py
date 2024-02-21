@@ -8,6 +8,12 @@ class Promotion(models.Model):
     discount = models.FloatField()
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=255)
+    featured_product = models.ForeignKey(
+        'Product', on_delete=models.SET_NULL, null=True, related_name="+")
+
+
 class Product(models.Model):
     # sku = models.CharField(max_length=255, unique=True,primary_key=True)  # varchar(255)
     title = models.CharField(max_length=255)  # varchar(255)
@@ -16,7 +22,7 @@ class Product(models.Model):
         max_digits=6, decimal_places=2)  # decimal(6,2)
     inventory = models.IntegerField()  # int
     last_updated = models.DateTimeField(auto_now_add=True)  # timestamp
-    Collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE)
     promotions = models.ManyToManyField(Promotion)
 
 
@@ -64,10 +70,6 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, primary_key=True)
-
-
-class Collection(models.Model):
-    title = models.CharField(max_length=255)
 
 
 class Cart(models.Model):
